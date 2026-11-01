@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛰️ GroundLens
+# GroundLens
 
 ### Real photos from any location, on demand.
 
@@ -14,27 +14,26 @@ A two-sided marketplace that connects people who need proof of what's happening 
 ![Motion](https://img.shields.io/badge/Motion-000000?style=flat-square&logo=framer&logoColor=white)
 ![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=flat-square&logo=firebase&logoColor=black)
 
-<img src="docs/screenshot.png" alt="GroundLens landing page" width="100%" />
 
 </div>
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-- [About](#-about)
-- [Key Features](#-key-features)
-- [How It Works](#-how-it-works)
-- [Who It's For](#-who-its-for)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Roadmap](#-roadmap)
-- [Author](#-author)
+- [About](#about)
+- [Key Features](#key-features)
+- [How It Works](#how-it-works)
+- [Who It's For](#who-its-for)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Roadmap](#roadmap)
+- [Author](#author)
 
 ---
 
-## 💡 About
+## About
 
 **The problem:** When you need to know what a place looks like *right now* (a property before you rent it, a delivery drop-off, a shop front, a site's construction progress), your options are outdated map imagery, a stranger's word, or travelling there yourself.
 
@@ -42,7 +41,7 @@ A two-sided marketplace that connects people who need proof of what's happening 
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 | Feature | Description |
 |---|---|
@@ -58,7 +57,7 @@ A two-sided marketplace that connects people who need proof of what's happening 
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 ```mermaid
 flowchart LR
@@ -75,7 +74,7 @@ flowchart LR
 
 ---
 
-## 🎯 Who It's For
+## Who It's For
 
 - **Real estate:** check a property or neighbourhood before visiting or renting
 - **Logistics and e-commerce:** confirm deliveries and drop-off conditions
@@ -86,7 +85,7 @@ flowchart LR
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -98,20 +97,18 @@ flowchart LR
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 GroundLens/
 ├── index.html      # Landing page, requester and scout dashboards
 ├── styles.css      # Design system, layout and responsive styles
-├── app.js          # Navigation, dashboards, task flow, GPS capture, AI assistant
-└── docs/
-    └── screenshot.png
+└── app.js          # Navigation, dashboards, task flow, GPS capture, AI assistant
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 **Prerequisites:** a modern browser and [Node.js](https://nodejs.org) (only for the local server).
 
@@ -130,7 +127,7 @@ Then open the URL it prints (usually `http://localhost:3000`).
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [x] Landing page with how-it-works, industries and network sections
 - [x] Requester and Scout dashboards
@@ -143,7 +140,7 @@ Then open the URL it prints (usually `http://localhost:3000`).
 
 ---
 
-## 👤 Author
+## Author
 
 **Dhruv Agrawal**
 
