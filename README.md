@@ -19,7 +19,6 @@ A two-sided marketplace that connects people who need proof of what's happening 
 
 ---
 
-
 ## About
 
 **The problem:** When you need to know what a place looks like *right now* (a property before you rent it, a delivery drop-off, a shop front, a site's construction progress), your options are outdated map imagery, a stranger's word, or travelling there yourself.
