@@ -19,19 +19,6 @@ A two-sided marketplace that connects people who need proof of what's happening 
 
 ---
 
-## Table of Contents
-
-- [About](#about)
-- [Key Features](#key-features)
-- [How It Works](#how-it-works)
-- [Who It's For](#who-its-for)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Roadmap](#roadmap)
-- [Author](#author)
-
----
 
 ## About
 
