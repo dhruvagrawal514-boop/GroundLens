@@ -225,7 +225,7 @@ function buildPostTask() {
         </div>
     </div>
     <div class="req-glass-card req-max-w-card" style="margin: 0;">
-        <form id="form-post-task" class="req-form">
+        <form id="form-post-task" class="req-form" novalidate>
             <div class="req-form-group">
                 <label>Target Designation</label>
                 <input type="text" id="pt-title" class="req-input-premium" required placeholder="e.g. Verify Parker's queue length" />
