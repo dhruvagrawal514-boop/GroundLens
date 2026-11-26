@@ -12,7 +12,12 @@ A two-sided marketplace that connects people who need proof of what's happening 
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![Motion](https://img.shields.io/badge/Motion-000000?style=flat-square&logo=framer&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)
 ![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-FFCA28?style=flat-square&logo=firebase&logoColor=black)
+
+[![CI](https://github.com/dhruvagrawal514-boop/GroundLens/actions/workflows/ci.yml/badge.svg)](https://github.com/dhruvagrawal514-boop/GroundLens/actions/workflows/ci.yml)
 
 
 </div>
@@ -27,19 +32,18 @@ A two-sided marketplace that connects people who need proof of what's happening 
 
 ---
 
-## Key Features
+## Features
 
 | Feature | Description |
 |---|---|
-| 📍 **Location-Based Matching** | Requests are matched with the nearest available Scouts to the target location. |
-| 📸 **Verified Media Capture** | Captures record the target location and the Scout's live GPS position, so the proof can be trusted. |
-| 🛡️ **Trust Score System** | Scouts build a reputation score from completed, verified tasks. |
-| ⭐ **Ratings & Reviews** | Requesters rate each delivery, keeping quality high across the network. |
-| 🔔 **Real-Time Notifications** | Both sides are kept updated as a task moves from posted to delivered. |
-| 💳 **Secure Wallet** | Scouts track their earnings, and requesters manage payments in one place. |
-| 🎯 **Two Dashboards** | A **Requester** view to post and track tasks, and a **Scout** command center with a radar of nearby tasks. |
-| 🤖 **AI Assistant** | A built-in guide answers questions about posting tasks, pricing and becoming a Scout. |
-| 📱 **Installable Web App** | Can be added to the home screen for an app-like experience. |
+| 🎯 **Two dashboards** | A **Requester** dashboard to post and track tasks, and a **Scout** dashboard with a radar of nearby tasks to accept. |
+| 📝 **Task posting** | Requesters set a target, brief, media type (photo / video), bounty and deadline, with form validation. |
+| 🔔 **Notifications** | Unread badge, mark one or all as read. |
+| 💳 **Wallet & analytics** | Balance, transaction history and activity charts. |
+| 📱 **Responsive** | Full layout on desktop; bottom tab bar and compact nav on mobile. |
+| ✅ **Tested** | Playwright end-to-end tests run on desktop and mobile viewports in CI. |
+
+> **Status:** the UI runs on mock data. The Supabase client is set up (`src/lib/supabase.js`) and switches on once the environment variables are set; wiring auth and tasks to it is the next milestone (see the roadmap).
 
 ---
 
@@ -75,10 +79,11 @@ flowchart LR
 
 | Layer | Technology |
 |---|---|
-| **Frontend** | HTML5, CSS3, vanilla JavaScript (ES modules) |
-| **Animation** | [Motion](https://motion.dev) for scroll and entrance animations |
-| **Icons** | Font Awesome 6 |
-| **Browser APIs** | Geolocation API for live GPS capture |
+| **Frontend** | HTML, CSS, vanilla JavaScript (ES modules) |
+| **Build** | [Vite](https://vitejs.dev) |
+| **Animation** | [Motion](https://motion.dev) |
+| **Backend** | [Supabase](https://supabase.com) (auth + Postgres) |
+| **Testing** | [Playwright](https://playwright.dev), GitHub Actions |
 | **Hosting** | Firebase Hosting |
 
 ---
@@ -87,42 +92,65 @@ flowchart LR
 
 ```
 GroundLens/
-├── index.html      # Landing page, requester and scout dashboards
-├── styles.css      # Design system, layout and responsive styles
-└── app.js          # Navigation, dashboards, task flow, GPS capture, AI assistant
+├── index.html                 # App shell: top nav + view container
+├── src/
+│   ├── main.js                # Entry point: routing, nav, auth forms
+│   ├── state.js               # Shared app state (current user, role, view)
+│   ├── data/mock.js           # Placeholder data until Supabase is wired up
+│   ├── lib/
+│   │   ├── supabase.js        # Supabase client (null when env vars are unset)
+│   │   ├── notify.js          # Toast notifications
+│   │   ├── animate-number.js  # Count-up animation for stats
+│   │   ├── home-animations.js # Landing page scroll animations
+│   │   └── escape-html.js     # Escapes user input before rendering
+│   ├── views/
+│   │   ├── dashboard.js       # Requester dashboard and its tabs
+│   │   └── scout-dashboard.js # Scout radar and task panel
+│   ├── templates/             # HTML for each top-level view
+│   └── styles/
+│       ├── main.css           # Design system and components
+│       └── layout.css         # Navigation and responsive layout
+├── tests/e2e/                 # Playwright tests
+└── .github/workflows/ci.yml   # Build + test on every push and PR
 ```
 
 ---
 
 ## Getting Started
 
-**Prerequisites:** a modern browser and [Node.js](https://nodejs.org) (only for the local server).
+**Prerequisites:** [Node.js](https://nodejs.org) 20+
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/dhruvagrawal514-boop/GroundLens.git
 cd GroundLens
+npm install
 
-# 2. Start a local server
-npx serve .
+# Optional: connect Supabase
+cp .env.example .env   # then fill in your project URL and anon key
+
+npm run dev            # http://localhost:5173
 ```
 
-Then open the URL it prints (usually `http://localhost:3000`).
+| Script | What it does |
+|---|---|
+| `npm run dev` | Start the dev server with hot reload |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the production build on port 4173 |
+| `npm run test:e2e` | Run the Playwright tests (builds and serves automatically) |
 
-> A local server is needed because `app.js` is loaded as an ES module.
+First time running tests: `npx playwright install chromium`.
 
 ---
 
 ## Roadmap
 
-- [x] Landing page with how-it-works, industries and network sections
+- [x] Landing page with how-it-works, trust and testimonial sections
 - [x] Requester and Scout dashboards
-- [x] GPS-tagged capture flow
-- [x] AI assistant
-- [ ] Backend with real user accounts and task storage
+- [x] Modular Vite codebase with end-to-end tests and CI
+- [ ] Supabase auth (email + Google) and persisted tasks
+- [ ] GPS-tagged capture flow for Scouts
 - [ ] Live payments and Scout payouts
 - [ ] Image tamper detection and EXIF verification
-- [ ] Native Android app for Scouts
 
 ---
 
