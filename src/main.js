@@ -1,4 +1,5 @@
 import { animate, scroll, inView, stagger } from 'motion';
+import './styles/main.css';
 
 /* app.js */
 document.addEventListener('DOMContentLoaded', () => {
