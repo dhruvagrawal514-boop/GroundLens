@@ -18,3 +18,11 @@ export const transactions = [
     { id: 'TXN-3844', type: 'debit', desc: 'Task Posted - Brooklyn Bridge', amount: '-$20.00', date: 'Feb 25, 2026', status: 'Completed' },
     { id: 'TXN-3843', type: 'credit', desc: 'Task Payment - Wall Street', amount: '+$30.00', date: 'Feb 24, 2026', status: 'Completed' },
 ];
+
+// Open tasks near the scout, positioned on the radar as percentages.
+export const nearbyTasks = [
+    { id: 'T-1042', title: 'Verify Central Park Cafe is open', distance: '0.4 km', bounty: 25, deadline: 'Today, 6:00 PM', media: 'Photo', x: 32, y: 40 },
+    { id: 'T-1043', title: 'Queue length at Grand Station', distance: '1.1 km', bounty: 15, deadline: 'Today, 8:30 PM', media: 'Video', x: 68, y: 28 },
+    { id: 'T-1044', title: 'Check parking near Pier 17', distance: '2.3 km', bounty: 20, deadline: 'Tomorrow, 10:00 AM', media: 'Photo', x: 58, y: 72 },
+    { id: 'T-1045', title: 'Storefront condition on 5th Ave', distance: '3.0 km', bounty: 30, deadline: 'Tomorrow, 2:00 PM', media: 'Photo', x: 20, y: 75 },
+];
