@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navLinks.innerHTML = `
                 <a href="#how-it-works" class="nav-link" data-section="how-it-works">How It Works</a>
-                <a href="#trust" class="nav-link" data-section="trust">Trust</a>
-                <a href="#use-cases" class="nav-link" data-section="use-cases">Use Cases</a>`;
+                <a href="#features" class="nav-link" data-section="features">Trust</a>
+                <a href="#testimonials" class="nav-link" data-section="testimonials">Reviews</a>`;
             navProfile.innerHTML = `
                 <button type="button" class="nav-btn-text" data-nav="loginForm">Sign In</button>
                 <button type="button" class="nav-btn-primary btn-magnetic ripple-button" data-nav="registerForm">
