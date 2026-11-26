@@ -2,6 +2,7 @@ import { state } from '../state.js';
 import { notifications, transactions } from '../data/mock.js';
 import { showNotification } from '../lib/notify.js';
 import { animateNumber } from '../lib/animate-number.js';
+import { escapeHtml } from '../lib/escape-html.js';
 
 // =============================================
 //  INNER DASHBOARD ROUTER
@@ -74,7 +75,7 @@ function getGreeting() {
 }
 
 function buildDashboardHome() {
-    const name = state.currentUser ? state.currentUser.name.split(' ')[0] : 'User';
+    const name = state.currentUser ? escapeHtml(state.currentUser.name.split(' ')[0]) : 'User';
     return `
     <!-- Header -->
     <div class="dash-header">
@@ -117,7 +118,7 @@ function buildDashboardHome() {
                 <span class="dash-stat-value" id="dash-completed-tasks">0</span>
                 <span class="dash-stat-label">Completed</span>
             </div>
-            <span class="dash-stat-trend neutral">0% rate</span>
+            <span class="dash-stat-trend neutral">92% rate</span>
         </div>
         <div class="dash-stat-card">
             <div class="dash-stat-icon" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">
@@ -567,6 +568,7 @@ function attachDashViewEvents(viewName) {
             animateNumber(document.getElementById('dash-total-tasks'), 156, 1200);
             animateNumber(document.getElementById('dash-active-tasks'), 12, 1000);
             animateNumber(document.getElementById('dash-completed-tasks'), 140, 1500);
+            animateNumber(document.getElementById('dash-total-spent'), 2000, 1500, '$');
             animateNumber(document.getElementById('dash-wallet-amount'), 1250, 1500, '$');
             animateNumber(document.getElementById('dash-comp-rate'), 92, 1500, '', '%');
             const rateBar = document.getElementById('dash-rate-bar');
