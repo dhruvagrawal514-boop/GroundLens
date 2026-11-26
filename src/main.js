@@ -35,9 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'dashboard':
                 templateId = state.currentRole === 'doer' ? 'tmpl-doer-dashboard' : 'tmpl-full-dashboard';
                 break;
-            case 'createTask':
-                templateId = 'tmpl-create-task';
-                break;
             default:
                 templateId = 'tmpl-home';
         }
@@ -157,31 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderDashboardView(page);
             } else {
                 renderDashboardView(state.currentDashView || 'dashboard');
-            }
-
-        } else if (viewName === 'createTask') {
-            const cancelBtn = document.getElementById('btn-cancel-task');
-            if (cancelBtn) cancelBtn.addEventListener('click', () => renderView('dashboard'));
-
-            const mediaBtns = document.querySelectorAll('.req-seg-btn');
-            const mediaInput = document.getElementById('task-media');
-            if (mediaBtns.length > 0 && mediaInput) {
-                mediaBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        mediaBtns.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        mediaInput.value = btn.dataset.val;
-                    });
-                });
-            }
-
-            const createForm = document.getElementById('form-create-task');
-            if (createForm) {
-                createForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert('Targeting Scan Initialized! (Mock)');
-                    renderView('dashboard');
-                });
             }
         }
     }
