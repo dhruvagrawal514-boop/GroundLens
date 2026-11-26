@@ -1,0 +1,343 @@
+/*
+ * Layout and responsive fixes.
+ * Loaded after main.css so these rules take precedence.
+ */
+
+/* Decorative glows must never create a horizontal scrollbar. */
+html,
+body {
+    overflow-x: clip;
+}
+
+/* Full-bleed dashboard without a transform: a transform would turn the
+   fixed sidebar / mobile tab bar into children of this box. */
+.dash-layout {
+    width: 100vw;
+    left: auto;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    transform: none;
+}
+
+/* ---------- Top navigation ---------- */
+.glass-nav {
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--glass-border-subtle);
+    padding: 1.2rem 4rem;
+    gap: 1rem;
+}
+
+.glass-nav .logo {
+    gap: 0.8rem;
+    cursor: pointer;
+    letter-spacing: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex: 1;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link-active {
+    color: var(--text-main);
+}
+
+.nav-link-active {
+    font-weight: 600;
+}
+
+.nav-actions,
+.nav-profile,
+.nav-user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+.nav-user {
+    gap: 10px;
+}
+
+.nav-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--brand-cyan);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.nav-btn-text {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-btn-text:hover {
+    color: var(--text-main);
+}
+
+.nav-btn-primary {
+    background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.nav-btn-primary i {
+    font-size: 0.8rem;
+}
+
+.nav-btn-outline {
+    background: transparent;
+    border: 1px solid var(--glass-border-strong);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--brand-cyan);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+    .glass-nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-nav {
+        padding: 0.75rem 1rem;
+    }
+
+    .glass-nav .logo > div:first-child {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 1rem !important;
+    }
+
+    .glass-nav .logo > div:last-child {
+        font-size: 1.2rem !important;
+    }
+
+    /* Section links live in the page itself on small screens. */
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions,
+    .nav-profile {
+        gap: 0.75rem;
+    }
+
+    .nav-btn-primary {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .nav-btn-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-btn-primary i {
+        display: none;
+    }
+}
+
+/* ---------- Dashboard: bottom tab bar on mobile ---------- */
+@media (max-width: 768px) {
+    .dash-sidebar {
+        display: flex;
+        top: auto;
+        bottom: 0;
+        width: 100%;
+        min-height: 0;
+        flex-direction: row;
+        padding: 0.4rem 0.25rem calc(0.4rem + env(safe-area-inset-bottom));
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        background: rgba(10, 12, 20, 0.92);
+    }
+
+    .dash-sidebar-logo,
+    .dash-sidebar-user,
+    .dash-signout {
+        display: none !important;
+    }
+
+    .dash-sidebar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        gap: 0;
+        margin: 0;
+    }
+
+    .dash-sidebar-nav .dash-nav-item {
+        flex: 1;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.45rem 0.2rem;
+        font-size: 0.68rem;
+        text-align: center;
+    }
+
+    .dash-sidebar-nav .dash-nav-item i {
+        font-size: 1.05rem;
+    }
+
+    .dash-sidebar-nav .dash-nav-item.active::before {
+        display: none;
+    }
+
+    .dash-nav-badge {
+        position: absolute;
+        top: 2px;
+        right: calc(50% - 18px);
+    }
+
+    .dash-main {
+        padding-bottom: 6rem;
+    }
+
+    .dash-header {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+/* ---------- Scout dashboard ---------- */
+.radar-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid var(--brand-cyan);
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.radar-marker:hover,
+.radar-marker.selected {
+    transform: translate(-50%, -50%) scale(1.15);
+    background: var(--brand-cyan);
+}
+
+.radar-marker.accepted {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.35);
+}
+
+.scout-task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.scout-task-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.scout-accept-btn {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.scout-accept-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* The page-enter animation must not leave a transform/filter behind:
+   that would make every position: fixed child (sidebar, tab bar,
+   toasts) position itself against #main-content instead of the viewport. */
+#main-content.slide-up-anim {
+    animation-fill-mode: backwards;
+}
+
+/* Desktop sidebar sits underneath the sticky top nav. */
+@media (min-width: 769px) {
+    .dash-sidebar {
+        z-index: 90;
+        padding-top: 6.5rem;
+        height: 100vh;
+    }
+
+    .dash-sidebar-logo {
+        display: none;
+    }
+}
+
+.map-radar {
+    position: relative;
+    overflow: hidden;
+}
+
+.radar-marker.selected i {
+    color: #fff;
+}
+
+/* Let the main column shrink below its content width inside the flex row. */
+.dash-main {
+    min-width: 0;
+}

@@ -1,0 +1,67 @@
+        <div class="slide-up-anim"
+            style="min-height: 70vh; display: flex; align-items: center; justify-content: center; position: relative;">
+            <button onclick="renderView('login')"
+                style="position: absolute; top: 2rem; left: 4rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; transition: color 0.2s;"
+                onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <div style="width: 100%; max-width: 420px; padding: 2rem;">
+                <h2
+                    style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">
+                    Welcome back</h2>
+                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2.5rem; text-align: left;">Sign in
+                    to your
+                    GroundLens account</p>
+
+                <form id="form-login" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+                    <!-- Google Sign In Button -->
+                    <button type="button" id="btn-google-login" class="hover-lift"
+                        style="width: 100%; background: #ffffff; color: #333; padding: 1.1rem; border-radius: 12px; border: 1px solid var(--glass-border-strong); font-size: 1.05rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.8rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 0.5rem; transition: all 0.2s;">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo"
+                            style="width: 20px; height: 20px;">
+                        Continue with Google
+                    </button>
+
+                    <div
+                        style="display: flex; align-items: center; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">
+                        <div style="flex: 1; height: 1px; background: var(--glass-border-subtle);"></div>
+                        <span style="padding: 0 1rem; text-transform: uppercase; letter-spacing: 1px;">or</span>
+                        <div style="flex: 1; height: 1px; background: var(--glass-border-subtle);"></div>
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">Email</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" value="user@groundlens.com"
+                            style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 1rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;"
+                            onfocus="this.style.borderColor='var(--brand-cyan)'"
+                            onblur="this.style.borderColor='var(--glass-border-strong)'">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">Password</label>
+                        <div style="position: relative;">
+                            <input type="password" id="login-password" value="password123"
+                                style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 1rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='var(--brand-cyan)'"
+                                onblur="this.style.borderColor='var(--glass-border-strong)'">
+                            <i class="fa-regular fa-eye" data-toggle-password role="button" tabindex="0" aria-label="Show password"
+                                style="position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; z-index: 10;"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="hover-lift"
+                        style="width: 100%; background: var(--brand-cyan); color: var(--text-inverse); padding: 1.1rem; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px var(--brand-cyan-glow-subtle); margin-top: 0.5rem; transition: all 0.2s;">
+                        Sign In
+                    </button>
+
+                    <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                        Don't have an account? <a href="#" onclick="renderView('registerForm'); return false;"
+                            style="color: var(--brand-purple); text-decoration: none; font-weight: 600;">Sign up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
