@@ -16,30 +16,28 @@
                 <!-- Role Selection -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
                     <!-- User Role -->
-                    <div id="role-user-card" onclick="selectRole('user')"
+                    <div id="role-user-card" data-role-card="user" role="button" tabindex="0"
                         style="border: 1px solid var(--brand-cyan); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; background: var(--brand-cyan-muted);">
                         <div
                             style="width: 48px; height: 48px; border-radius: 16px; background: var(--brand-cyan); color: var(--text-inverse); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
                             <i class="fa-regular fa-user"></i>
                         </div>
                         <h4 style="color: var(--text-main); font-size: 1rem; margin-bottom: 0.2rem; font-weight: 600;">
-                            I'm a User
+                            I'm a Requester
                         </h4>
                         <p style="color: var(--text-muted); font-size: 0.8rem;">Post tasks</p>
                     </div>
                     <!-- Doer Role -->
-                    <div id="role-doer-card" onclick="selectRole('doer')"
-                        style="border: 1px solid var(--card-dark-bg); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;"
-                        onmouseover="if(this.dataset.active !== 'true') this.style.borderColor='rgba(255,255,255,0.2)'"
-                        onmouseout="if(this.dataset.active !== 'true') this.style.borderColor='var(--card-dark-bg)'">
+                    <div id="role-doer-card" data-role-card="doer" role="button" tabindex="0"
+                        style="border: 1px solid var(--card-dark-bg); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;">
                         <div
                             style="width: 48px; height: 48px; border-radius: 16px; background: var(--card-dark-bg); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
                             <i class="fa-solid fa-suitcase"></i>
                         </div>
                         <h4 style="color: var(--text-main); font-size: 1rem; margin-bottom: 0.2rem; font-weight: 600;">
-                            I'm a Doer
+                            I'm a Scout
                         </h4>
-                        <p style="color: var(--text-muted); font-size: 0.8rem;">Complete tasks & earn</p>
+                        <p style="color: var(--text-muted); font-size: 0.8rem;">Capture photos & earn</p>
                     </div>
                 </div>
 
@@ -74,7 +72,7 @@
                                 style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 0.9rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s;"
                                 onfocus="this.style.borderColor='var(--brand-cyan)'"
                                 onblur="this.style.borderColor='var(--glass-border-strong)'">
-                            <i class="fa-regular fa-eye" onclick="window.togglePassword(this)"
+                            <i class="fa-regular fa-eye" data-toggle-password role="button" tabindex="0" aria-label="Show password"
                                 style="position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; z-index: 10;"></i>
                         </div>
                     </div>
@@ -88,7 +86,7 @@
                                 style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 0.9rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s;"
                                 onfocus="this.style.borderColor='var(--brand-cyan)'"
                                 onblur="this.style.borderColor='var(--glass-border-strong)'">
-                            <i class="fa-regular fa-eye" onclick="window.togglePassword(this)"
+                            <i class="fa-regular fa-eye" data-toggle-password role="button" tabindex="0" aria-label="Show password"
                                 style="position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; z-index: 10;"></i>
                         </div>
                     </div>

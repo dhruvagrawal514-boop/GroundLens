@@ -11,9 +11,8 @@
 <body>
     <div id="app">
         <!-- Navigation -->
-        <nav class="glass-nav"
-            style="background: var(--nav-bg); border-bottom: 1px solid var(--glass-border-subtle); padding: 1.2rem 4rem;">
-            <div class="logo" style="display: flex; align-items: center; gap: 0.8rem; cursor: pointer;">
+        <nav class="glass-nav" aria-label="Main">
+            <div class="logo" role="link" tabindex="0" aria-label="GroundLens home">
                 <div
                     style="background: var(--brand-cyan); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-inverse); font-size: 1.2rem; box-shadow: 0 0 15px var(--brand-cyan-glow);">
                     <i class="fa-solid fa-location-dot"></i>
@@ -23,16 +22,12 @@
                 </div>
             </div>
 
-            <div class="nav-links" id="nav-links" style="display: flex; gap: 2.5rem; justify-content: center; flex: 1;">
+            <div class="nav-links" id="nav-links">
                 <!-- Links injected by JS -->
             </div>
 
-            <div style="display:flex; align-items:center; gap: 1.5rem; justify-content: flex-end;" id="nav-actions">
-                <button id="theme-toggle" class="btn-magnetic"
-                    style="background:transparent; border:1px solid var(--glass-border-subtle); border-radius:50%; width: 40px; height: 40px; display:flex; align-items:center; justify-content:center; font-size: 1.1rem; color:var(--text-main); cursor: pointer; transition: all 0.3s ease;">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
-                <div id="nav-profile" style="display:flex; align-items:center; gap: 1.5rem;">
+            <div class="nav-actions" id="nav-actions">
+                <div id="nav-profile" class="nav-profile">
                     <!-- Profile snippet or login actions injected by JS -->
                 </div>
             </div>

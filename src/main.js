@@ -5,25 +5,23 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles/main.css';
+import './styles/layout.css';
 import { getTemplate } from './templates/index.js';
 import { state } from './state.js';
 import { showNotification } from './lib/notify.js';
 import { initHomeAnimations } from './lib/home-animations.js';
 import { renderDashboardView } from './views/dashboard.js';
+import { renderScoutDashboard } from './views/scout-dashboard.js';
+import { escapeHtml } from './lib/escape-html.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
     const navLinks = document.getElementById('nav-links');
     const navProfile = document.getElementById('nav-profile');
-    const themeToggle = document.getElementById('theme-toggle');
 
-    // Theme toggle
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-    });
-
-    // Router function
-    window.renderView = function (viewName) {
+    // Router function (also exposed on window for the dashboard sub-views)
+    window.renderView = renderView;
+    function renderView(viewName) {
         mainContent.innerHTML = '';
 
         let templateId = '';
@@ -54,37 +52,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updateNav();
-    };
+    }
 
     function updateNav() {
         if (!navLinks || !navProfile) return;
-        navLinks.innerHTML = '';
-        navProfile.innerHTML = '';
 
         if (state.currentUser) {
-            navLinks.innerHTML = `
-                <a href="#" onclick="renderView('dashboard'); return false;" style="text-decoration:none; color:var(--text-main); font-weight:600;">Dashboard</a>
-            `;
+            const initial = escapeHtml(state.currentUser.name.trim()[0] || '?').toUpperCase();
+            navLinks.innerHTML = `<a href="#" class="nav-link nav-link-active" data-nav="dashboard">Dashboard</a>`;
             navProfile.innerHTML = `
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="width:32px; height:32px; border-radius:50%; background:var(--brand-cyan); color:white; display:flex; align-items:center; justify-content:center;">${state.currentUser.name[0]}</div>
-                    <button onclick="logout()" class="btn-magnetic" style="background:transparent; border:1px solid var(--glass-border-strong); color:var(--text-main); padding:0.5rem 1rem; border-radius:8px; cursor:pointer;">Logout</button>
-                </div>
-            `;
+                <div class="nav-user">
+                    <div class="nav-avatar" aria-hidden="true">${initial}</div>
+                    <button type="button" class="nav-btn-outline btn-magnetic" data-nav="logout">Log out</button>
+                </div>`;
         } else {
             navLinks.innerHTML = `
-                <a href="#how-it-works" onclick="renderView('home'); return false;" style="text-decoration:none; color:var(--text-muted); font-size: 0.95rem; font-weight:500; transition: color 0.3s ease;" onmouseover="this.style.color='var(--text-main)';" onmouseout="this.style.color='var(--text-muted)';">How It Works</a>
-                <a href="#trust" onclick="renderView('home'); return false;" style="text-decoration:none; color:var(--text-muted); font-size: 0.95rem; font-weight:500; transition: color 0.3s ease;" onmouseover="this.style.color='var(--text-main)';" onmouseout="this.style.color='var(--text-muted)';">Trust</a>
-                <a href="#use-cases" onclick="renderView('home'); return false;" style="text-decoration:none; color:var(--text-muted); font-size: 0.95rem; font-weight:500; transition: color 0.3s ease;" onmouseover="this.style.color='var(--text-main)';" onmouseout="this.style.color='var(--text-muted)';">Use Cases</a>
-            `;
+                <a href="#how-it-works" class="nav-link" data-section="how-it-works">How It Works</a>
+                <a href="#trust" class="nav-link" data-section="trust">Trust</a>
+                <a href="#use-cases" class="nav-link" data-section="use-cases">Use Cases</a>`;
             navProfile.innerHTML = `
-                <button onclick="renderView('login')" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-weight:500; font-size: 0.95rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--text-main)';" onmouseout="this.style.color='var(--text-muted)';">Sign In</button>
-                <button onclick="renderView('registerForm')" class="btn-magnetic ripple-button" style="background:linear-gradient(135deg, #06b6d4, #8b5cf6); color:white; border:none; padding:0.6rem 1.2rem; border-radius:30px; cursor:pointer; font-weight:600; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);">
-                    Get Started <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
-                </button>
-            `;
+                <button type="button" class="nav-btn-text" data-nav="loginForm">Sign In</button>
+                <button type="button" class="nav-btn-primary btn-magnetic ripple-button" data-nav="registerForm">
+                    Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>`;
         }
     }
+
+    // One delegated handler for every nav link and button.
+    document.querySelector('.glass-nav').addEventListener('click', (e) => {
+        const logo = e.target.closest('.logo');
+        const navTarget = e.target.closest('[data-nav]');
+        const sectionLink = e.target.closest('[data-section]');
+
+        if (logo) {
+            e.preventDefault();
+            renderView(state.currentUser ? 'dashboard' : 'home');
+        } else if (navTarget) {
+            e.preventDefault();
+            if (navTarget.dataset.nav === 'logout') logout();
+            else renderView(navTarget.dataset.nav);
+        } else if (sectionLink) {
+            e.preventDefault();
+            scrollToSection(sectionLink.dataset.section);
+        }
+    });
+
+    function scrollToSection(id) {
+        if (!document.getElementById(id)) renderView('home');
+        requestAnimationFrame(() => {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    // Password show/hide toggles (login + register forms)
+    mainContent.addEventListener('click', (e) => {
+        const toggle = e.target.closest('[data-toggle-password]');
+        if (toggle) togglePassword(toggle);
+    });
+    mainContent.addEventListener('keydown', (e) => {
+        const toggle = e.target.closest('[data-toggle-password]');
+        if (toggle && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            togglePassword(toggle);
+        }
+    });
 
     // =============================================
     //  MAIN EVENT ATTACHMENTS
@@ -93,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (viewName === 'home') {
             document.querySelectorAll('.role-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    state.currentRole = e.target.dataset.role || 'user';
+                    state.currentRole = e.currentTarget.dataset.role || 'user';
                     renderView('registerForm');
                 });
             });
@@ -116,16 +147,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         } else if (viewName === 'registerForm') {
+            document.querySelectorAll('[data-role-card]').forEach(card => {
+                card.addEventListener('click', () => selectRole(card.dataset.roleCard));
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        selectRole(card.dataset.roleCard);
+                    }
+                });
+            });
+            selectRole(state.currentRole);
+
             const regForm = document.getElementById('form-register');
             if (regForm) {
                 regForm.addEventListener('submit', (e) => {
                     e.preventDefault();
+                    const password = document.getElementById('reg-password')?.value || '';
+                    const confirm = document.getElementById('reg-confirm')?.value || '';
+                    if (password.length < 8) {
+                        showNotification('Password must be at least 8 characters', 'warning');
+                        return;
+                    }
+                    if (password !== confirm) {
+                        showNotification('Passwords do not match', 'warning');
+                        return;
+                    }
                     const nameInput = document.getElementById('reg-name');
-                    const name = nameInput ? (nameInput.value || 'New User') : 'New User';
-                    state.currentUser = { name: name, email: 'new@example.com' };
+                    const emailInput = document.getElementById('reg-email');
+                    const name = nameInput?.value.trim() || 'New User';
+                    const email = emailInput?.value.trim() || 'new@example.com';
+                    state.currentUser = { name, email };
                     renderView('dashboard');
                 });
             }
+        } else if (viewName === 'dashboard' && state.currentRole === 'doer') {
+            renderScoutDashboard();
         } else if (viewName === 'dashboard') {
             // Populate user info in sidebar
             const dashName = document.getElementById('dash-user-name');
@@ -133,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dashAvatar = document.getElementById('dash-avatar');
             if (dashName && state.currentUser) dashName.textContent = state.currentUser.name;
             if (dashEmail && state.currentUser) dashEmail.textContent = state.currentUser.email;
-            if (dashAvatar && state.currentUser) dashAvatar.textContent = state.currentUser.name[0];
+            if (dashAvatar && state.currentUser) dashAvatar.textContent = (state.currentUser.name.trim()[0] || '?').toUpperCase();
 
             // Sign out
             const signoutBtn = document.getElementById('dash-signout');
@@ -167,13 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================================
     //  UTILITIES
     // =============================================
-    window.logout = function () {
+    function logout() {
         state.currentUser = null;
+        state.currentRole = 'user';
         state.currentDashView = 'dashboard';
+        history.replaceState(null, '', window.location.pathname);
         renderView('home');
-    };
+        window.scrollTo(0, 0);
+    }
 
-    window.togglePassword = function (icon) {
+    function togglePassword(icon) {
         const input = icon.previousElementSibling;
         if (input.type === 'password') {
             input.type = 'text';
@@ -184,9 +243,10 @@ document.addEventListener('DOMContentLoaded', () => {
             icon.classList.remove('fa-eye-slash');
             icon.classList.add('fa-eye');
         }
-    };
+        icon.setAttribute('aria-label', input.type === 'password' ? 'Show password' : 'Hide password');
+    }
 
-    window.selectRole = function (role) {
+    function selectRole(role) {
         state.currentRole = role;
         const userCard = document.getElementById('role-user-card');
         const doerCard = document.getElementById('role-doer-card');
@@ -198,7 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
             doerCard.style.background = role === 'doer' ? 'var(--brand-cyan-muted)' : 'var(--card-dark-bg)';
             doerCard.style.borderColor = role === 'doer' ? 'var(--brand-cyan)' : 'var(--glass-border-strong)';
         }
-    };
+        userCard?.setAttribute('aria-pressed', String(role === 'user'));
+        doerCard?.setAttribute('aria-pressed', String(role === 'doer'));
+    }
 
     // Listen to hash changes for browser nav
     window.addEventListener('hashchange', () => {
@@ -210,6 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderDashboardView(page);
             }
         }
+    });
+
+    // Keyboard support for the logo
+    document.querySelector('.glass-nav .logo')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') renderView(state.currentUser ? 'dashboard' : 'home');
     });
 
     // Initialize
