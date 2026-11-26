@@ -1,5 +1,6 @@
 import { animate, scroll, inView, stagger } from 'motion';
 import './styles/main.css';
+import { getTemplate } from './templates/index.js';
 
 /* app.js */
 document.addEventListener('DOMContentLoaded', () => {
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 templateId = 'tmpl-home';
         }
 
-        const template = document.getElementById(templateId);
+        const template = getTemplate(templateId);
         if (template) {
             mainContent.appendChild(template.content.cloneNode(true));
             attachEvents(viewName);

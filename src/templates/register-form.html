@@ -1,0 +1,108 @@
+        <div class="slide-up-anim"
+            style="min-height: 70vh; display: flex; align-items: center; justify-content: center; position: relative;">
+            <button onclick="renderView('login')"
+                style="position: absolute; top: 2rem; left: 4rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; transition: color 0.2s;"
+                onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <div style="width: 100%; max-width: 480px; padding: 2rem;">
+                <h2
+                    style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">
+                    Create account</h2>
+                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; text-align: left;">Join
+                    GroundLens
+                    Marketplace</p>
+
+                <!-- Role Selection -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                    <!-- User Role -->
+                    <div id="role-user-card" onclick="selectRole('user')"
+                        style="border: 1px solid var(--brand-cyan); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; background: var(--brand-cyan-muted);">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: 16px; background: var(--brand-cyan); color: var(--text-inverse); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <h4 style="color: var(--text-main); font-size: 1rem; margin-bottom: 0.2rem; font-weight: 600;">
+                            I'm a User
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.8rem;">Post tasks</p>
+                    </div>
+                    <!-- Doer Role -->
+                    <div id="role-doer-card" onclick="selectRole('doer')"
+                        style="border: 1px solid var(--card-dark-bg); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;"
+                        onmouseover="if(this.dataset.active !== 'true') this.style.borderColor='rgba(255,255,255,0.2)'"
+                        onmouseout="if(this.dataset.active !== 'true') this.style.borderColor='var(--card-dark-bg)'">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: 16px; background: var(--card-dark-bg); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-suitcase"></i>
+                        </div>
+                        <h4 style="color: var(--text-main); font-size: 1rem; margin-bottom: 0.2rem; font-weight: 600;">
+                            I'm a Doer
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 0.8rem;">Complete tasks & earn</p>
+                    </div>
+                </div>
+
+                <form id="form-register" style="display: flex; flex-direction: column; gap: 1.2rem;">
+
+
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">Full
+                            Name</label>
+                        <input type="text" id="reg-name" placeholder="Alex Johnson"
+                            style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 0.9rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s;"
+                            onfocus="this.style.borderColor='var(--brand-cyan)'"
+                            onblur="this.style.borderColor='var(--glass-border-strong)'">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">Email</label>
+                        <input type="email" id="reg-email" placeholder="you@example.com"
+                            style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 0.9rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s;"
+                            onfocus="this.style.borderColor='var(--brand-cyan)'"
+                            onblur="this.style.borderColor='var(--glass-border-strong)'">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">Password</label>
+                        <div style="position: relative;">
+                            <input type="password" id="reg-password" value=""
+                                style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 0.9rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='var(--brand-cyan)'"
+                                onblur="this.style.borderColor='var(--glass-border-strong)'">
+                            <i class="fa-regular fa-eye" onclick="window.togglePassword(this)"
+                                style="position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; z-index: 10;"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; text-align: left;">Confirm
+                            Password</label>
+                        <div style="position: relative;">
+                            <input type="password" id="reg-confirm" value=""
+                                style="width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--glass-border-strong); color: var(--text-main); padding: 0.9rem 1.2rem; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='var(--brand-cyan)'"
+                                onblur="this.style.borderColor='var(--glass-border-strong)'">
+                            <i class="fa-regular fa-eye" onclick="window.togglePassword(this)"
+                                style="position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; z-index: 10;"></i>
+                        </div>
+                    </div>
+
+                    <button id="register-submit-btn" type="submit" class="hover-lift"
+                        style="width: 100%; background: var(--brand-cyan); color: var(--text-inverse); padding: 1.1rem; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px var(--brand-cyan-glow-subtle); margin-top: 1rem; transition: all 0.2s;">
+                        Create Account
+                    </button>
+
+                    <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                        Already have an account? <a href="#" onclick="renderView('loginForm'); return false;"
+                            style="color: var(--brand-purple); text-decoration: none; font-weight: 600;">Sign in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    

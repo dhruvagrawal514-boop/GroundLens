@@ -1,0 +1,32 @@
+        <div class="split-view slide-up-anim layout-mobile-rev">
+            <!-- Left Side: Radar Map -->
+            <div class="glass-card map-radar">
+                <div class="radar-scan"></div>
+                <h3><i class="fa-solid fa-satellite-dish"></i> Radar: Nearby Tasks</h3>
+                <div id="radar-markers-container"
+                    style="position:relative; height: 300px; margin-top: 1rem; background: var(--glass-bg-darker); border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border)">
+                    <!-- Markers injected by JS -->
+                </div>
+            </div>
+
+            <!-- Right Side: Stats & Selected Task -->
+            <div>
+                <div class="glass-card mb-4"
+                    style="display:flex; justify-content:space-between; align-items:center; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05))">
+                    <div>
+                        <span style="font-size:0.85rem; color:var(--text-muted)">Current Balance</span>
+                        <h2 style="color:var(--accent); margin:0">$120.50</h2>
+                    </div>
+                    <div style="text-align:right">
+                        <span style="font-size:0.85rem; color:var(--text-muted)">Trust Score</span>
+                        <h3 style="margin:0"><i class="fa-solid fa-star" style="color:var(--warning)"></i> 4.9/5.0</h3>
+                    </div>
+                </div>
+
+                <div class="glass-card" id="doer-task-action-panel">
+                    <p style="text-align:center; color: var(--text-muted); margin: 2rem 0;">Click a pin on the radar to
+                        view task details.</p>
+                </div>
+            </div>
+        </div>
+    
